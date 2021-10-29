@@ -1,9 +1,13 @@
 package dev.naman.splitwise_class.services.console;
 
-public interface CommandInterface {
-    boolean matches(String command);
+import dev.naman.splitwise_class.services.console.exceptions.InvalidInputException;
 
-    void execute(String command);
+import java.util.List;
+
+public interface CommandInterface {
+    boolean matches(List<String> command);
+
+    void execute(List<String> command) throws InvalidInputException;
 }
 
 // check if a particular string is for that command

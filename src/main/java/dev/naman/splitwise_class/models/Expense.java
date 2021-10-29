@@ -47,3 +47,5 @@ public class Expense extends Auditable { // table: expenses
 // 2 1 to many relationships
 // group -> owners
 // group _> past members
+
+// will start the class at 9:10 PM
