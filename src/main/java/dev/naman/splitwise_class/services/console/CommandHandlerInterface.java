@@ -1,6 +1,7 @@
 package dev.naman.splitwise_class.services.console;
 
 import dev.naman.splitwise_class.services.console.exceptions.CommandNotValidException;
+import org.springframework.stereotype.Service;
 
 public interface CommandHandlerInterface {
     void execute(String command) throws CommandNotValidException;

@@ -3,11 +3,13 @@ package dev.naman.splitwise_class.services.console;
 import dev.naman.splitwise_class.controllers.UserController;
 import dev.naman.splitwise_class.dtos.RegisterUserRequestDto;
 import dev.naman.splitwise_class.dtos.RegisterUserResponseDto;
+import dev.naman.splitwise_class.repositories.UserRepository;
 import dev.naman.splitwise_class.services.console.exceptions.InvalidInputException;
 import dev.naman.splitwise_class.validators.UsernameValidator;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Service
 public class RegisterUserCommand implements CommandInterface {
-    @Autowired
     private UsernameValidator usernameValidator;
-    @Autowired
     private UserController userController;
 
     @Autowired
@@ -74,3 +74,13 @@ public class RegisterUserCommand implements CommandInterface {
 // console will interact with controller
 // controller will interact with service
 // service will interact with a repository
+
+// Machine COding: 30 mins of discussions
+// + 1 hrs of implementation
+// 30 mins of discussions
+
+//  1. Start with the boilerplate
+// Create all the packages: controlller, services, repositories
+// Create services (Only implement 1)
+// Go and implement the runner
+// start creating srvices 1 by 1

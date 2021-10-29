@@ -1,11 +1,11 @@
 package dev.naman.splitwise_class;
 
+import dev.naman.splitwise_class.controllers.UserController;
 import dev.naman.splitwise_class.models.Auditable;
-import dev.naman.splitwise_class.services.console.CommandHandlerImpl;
-import dev.naman.splitwise_class.services.console.CommandHandlerInterface;
-import dev.naman.splitwise_class.services.console.CommandInterface;
-import dev.naman.splitwise_class.services.console.RegisterUserCommand;
+import dev.naman.splitwise_class.services.console.*;
 import dev.naman.splitwise_class.services.console.exceptions.CommandNotValidException;
+import org.jboss.jandex.Main;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,17 +17,23 @@ import java.io.InputStreamReader;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@ComponentScan("dev.naman.splitwise_class")
-public class SplitwiseClassApplication {
+public class SplitwiseClassApplication implements CommandLineRunner {
+    private CommandRegistrar commandRegistrar;
+    private CommandHandlerInterface commandHandler;
+    public SplitwiseClassApplication(CommandHandlerInterface commandHandler, CommandRegistrar commandRegistrar) {
+        this.commandRegistrar = commandRegistrar;
+        this.commandHandler = commandHandler;
+    }
 
     public static void main(String[] args) {
+        SpringApplication.run(SplitwiseClassApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        SpringApplication.run(SplitwiseClassApplication.class, args);
-        CommandHandlerInterface commandHandler = new CommandHandlerImpl();
-        // register command A
-        CommandInterface c1 = new RegisterUserCommand();
-        commandHandler.registerCommand(c1);
+        commandRegistrar.execute();
 
         while (true) {
             try {
@@ -40,9 +46,14 @@ public class SplitwiseClassApplication {
                 System.out.println("Some input error happened");
             }
         }
-
     }
-
 }
 
 // Register User  vinsmokesanji 003 namisswwaann
+
+// when we run main
+// spring creates an object of SpringApplicationContext() set()
+// recursively starts going tghrough every dependency
+// create an object of each of those and stores it in the context
+// starts running the program
+// Map{ClassName, object}
